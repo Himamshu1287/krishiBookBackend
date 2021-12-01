@@ -1,0 +1,267 @@
+{
+	"info": {
+		"_postman_id": "4ce8c7be-a9a0-4162-b984-65883c9b9cea",
+		"name": "ProjectInitialSetup",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "userSignup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "role",
+						"value": "user",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\":\"abc\",\n    \"gender\": \"male\",\n    \"lastName\":\"xyz\",\n    \"email\":\"abhi.patel2151@gmail.com\",\n    \"mobile\": \"1234567890\",\n    \"password\":\"1234567890\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:4000/api/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "userSignin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "role",
+						"value": "user",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"abhi.patel2151@gmail.com\",\n    \"password\":\"1234567890\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:4000/api/signin"
+			},
+			"response": []
+		},
+		{
+			"name": "getDetail",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzA4MTQ3MjEsImRhdGEiOnsidXNlcklkIjoiNjEzMzQ0ZDcyOTg3MGE1NmEyYzUyMWRlIiwicm9sZSI6IjYxMzMyODlmYjQ1YzZkNDQxNTBmMmRkOCJ9LCJpYXQiOjE2MzA3NDk5MjF9.-cESULNiKCYbjE3YnjMHB-V7CH7o_meQ63XVuMep9OQ",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost:4000/api/user/detail"
+			},
+			"response": []
+		},
+		{
+			"name": "userUpdate",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzEwNzgxMjAsImRhdGEiOnsidXNlcklkIjoiNjEzNzI4ODU3ZjhhNjM1ZWMzYmFkNTgwIiwicm9sZSI6IjYxMzcyM2U3MzEyZGVmNWM3NTgwMDc2OSJ9LCJpYXQiOjE2MzEwMTMzMjB9.eVDfe6XBc_Ym0935NVdNh4lXz1M76I16Tp_S27xEHGs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\":\"6137241f312def5c75800773\",\n    \"firstName\":\"xyz\",\n    \"gender\": \"female\",\n    \"lastName\":\"uuu\",\n    \"email\": \"abu@gmail.com\",\n    \"mobile\":\"12367677790\",\n    \"permissions\":{\"hello\":\"ggggh\"}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:4000/api/user/update"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzEwNjk2MjcsImRhdGEiOnsidXNlcklkIjoiNjEzNzI0MWYzMTJkZWY1Yzc1ODAwNzczIiwicm9sZSI6IjYxMzcyM2U3MzEyZGVmNWM3NTgwMDc2YiJ9LCJpYXQiOjE2MzEwMDQ4Mjd9.SHQqMkj9_MokC-4KDGjywtUS572HIazcDd7MHsiXrrk",
+						"type": "text"
+					}
+				],
+				"url": "localhost:4000/api/user/delete"
+			},
+			"response": []
+		},
+		{
+			"name": "userLogout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzA4MTQ3MjEsImRhdGEiOnsidXNlcklkIjoiNjEzMzQ0ZDcyOTg3MGE1NmEyYzUyMWRlIiwicm9sZSI6IjYxMzMyODlmYjQ1YzZkNDQxNTBmMmRkOCJ9LCJpYXQiOjE2MzA3NDk5MjF9.-cESULNiKCYbjE3YnjMHB-V7CH7o_meQ63XVuMep9OQ",
+						"type": "text"
+					}
+				],
+				"url": "localhost:4000/api/user/logout"
+			},
+			"response": []
+		},
+		{
+			"name": "changePassword",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzA4MDg5NDMsImRhdGEiOnsidXNlcklkIjoiNjEzMzJkZjYwZjE3MDQ0NjNjNjcyOGMxIiwicm9sZSI6IjYxMzMyODlmYjQ1YzZkNDQxNTBmMmRkOCJ9LCJpYXQiOjE2MzA3NDQxNDN9.eZjDwxqPNiFruO5nXsY5m5GcJJWzrLOl4AL3PJQjySg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"oldPassword\":\"1234567\",\n    \"newPassword\":\"asdfghjkl\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:4000/api/user/changePassword"
+			},
+			"response": []
+		},
+		{
+			"name": "addRole",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzA5ODM4OTQsImRhdGEiOnsidXNlcklkIjoiNjEzNWQ5YTAyOTU4YjUzMzhhOTFmODQ2Iiwicm9sZSI6IjYxMzM0NmNjZDc0ZjZlNTg2YTc4OTYyZiJ9LCJpYXQiOjE2MzA5MTkwOTR9.kPhSRtWoTbZOhwWRzmSnydrtURQfElFQvYETaYftHGo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"role\":\"user\",\n    \"permissions\": { \"user\":{\"delete\":true,\"update\":true}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:4000/api/role/add"
+			},
+			"response": []
+		},
+		{
+			"name": "userList",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzEwNzkxMzUsImRhdGEiOnsidXNlcklkIjoiNjEzNzQ2M2NlOTkyMGQxYjA4OTg3ODgyIiwicm9sZSI6IjYxMzcyM2U3MzEyZGVmNWM3NTgwMDc2YiJ9LCJpYXQiOjE2MzEwMTQzMzV9.6r2I5MW9jdkKAQVzCQqjXNBoCFyy22ei94cJZH8I5kI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:4000/api/user/list"
+			},
+			"response": []
+		},
+		{
+			"name": "updateRole",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzA5NzU5NDIsImRhdGEiOnsidXNlcklkIjoiNjEzNWIzMjJlYjM1MGUyMDU3YzdiM2FjIiwicm9sZSI6IjYxMzM0NmNjZDc0ZjZlNTg2YTc4OTYyZiJ9LCJpYXQiOjE2MzA5MTExNDJ9.ZT0G5nVRLkh9k-dvvuKWxU0DgvB865zvJZk8NSrST5A",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"role\":\"user\",\n    \"permissions\":[\"update\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:4000/api/role/update"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteRole",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzA5ODMyMzYsImRhdGEiOnsidXNlcklkIjoiNjEzNWIzMjJlYjM1MGUyMDU3YzdiM2FjIiwicm9sZSI6IjYxMzM0NmNjZDc0ZjZlNTg2YTc4OTYyZiJ9LCJpYXQiOjE2MzA5MTg0MzZ9.Ung1YMvwUZ__oiVTjqqMgLMyeQUH9imqYcEbM5isw8A",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"role\":\"user\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:4000/api/role/delete"
+			},
+			"response": []
+		},
+		{
+			"name": "roleList",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzEwNzkxMzUsImRhdGEiOnsidXNlcklkIjoiNjEzNzQ2M2NlOTkyMGQxYjA4OTg3ODgyIiwicm9sZSI6IjYxMzcyM2U3MzEyZGVmNWM3NTgwMDc2YiJ9LCJpYXQiOjE2MzEwMTQzMzV9.6r2I5MW9jdkKAQVzCQqjXNBoCFyy22ei94cJZH8I5kI",
+						"type": "text"
+					}
+				],
+				"url": "localhost:4000/api/role/list"
+			},
+			"response": []
+		}
+	]
+}

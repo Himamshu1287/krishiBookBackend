@@ -1,0 +1,526 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0", 
+      "title": "NodejsInitial",
+      "description": "NodejsInitial Application API"
+      
+
+    },
+    "host": "3.15.198.113:4000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Users",
+        "description": "APIs that called by Users."
+      },
+      
+      {
+          "name":"Admin",
+          "description":"APIs that called by admin."
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+  
+
+  "paths": {
+    "/api/signup":{
+        "post":{
+            "tags":["Users"],
+            "description":"Sign up process for users:\n\n - At the time of signup user will be asked to insert basic details about user in json as shown in example.\n - user's  email is verified then user can login else user have to verify email.\n - You can use admin/users any of the given roles.",
+            "parameters":[
+                {
+                    "name":"role",
+                    "in":"header",
+                    "description":"users role",
+                    "schema": {
+                        "type":"object",
+                        "properties":{
+                            "role":{
+                                "type":"string",
+                                "example":"user/admin"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "user",
+                    "in": "body",
+                    "description": "User that we want to create",
+                    "schema": {
+                        "type":"object",
+                        "properties": {
+                            "firstName": {
+                                "type": "string",
+                                "example":"xyz"
+                            },
+                            "lastName": {
+                                "type": "string",
+                                "example":"abc"
+                            },
+                            "gender": {
+                                "type": "string",
+                                "example":"male/femail"
+                            },
+                            "mobile": {
+                                "type":"Number",
+                                "example":"6777687878"
+                            },
+                            "email": {
+                            "type": "string",
+                            "example":"abc@gmail.com"
+                            },
+                            "password": {
+                                "type": "string",
+                                "example":"abc@123"
+                            }
+                        }
+                    }
+                }
+            ],
+            "produces":["application/json"],
+            "responses": {
+                "409":{
+                    "description":"User already exist."
+                },
+                "201":{
+                    "description":"User created successfully."
+                }
+            }
+        }
+    },
+    "/api/signin": {
+
+        "post": {
+            "tags":["Users"],
+            "description":"Login will be common in our system.\n - After login an authentication token will be generated using JWT.\n - Token will be required for after login api's  like update, logout and other.",
+            "parameters":[
+                {
+                    "name": "user",
+                    "in": "body",
+                    "description": "User that we want to create",
+                    "schema": {
+                        "type":"object",
+                        "properties": {
+                            
+                            "email": {
+                            "type": "string",
+                            "example":"abc@gmail.com"
+                            },
+                            "password": {
+                                "type": "string",
+                                "example":"abc@123"
+                            }
+                        }
+                    }
+                }
+            ],
+            "requestBody": {
+                "content": 
+                "application/json"
+            },
+            "produces":["application/json"],
+            "responses": {
+                "202": {
+                    "description":"Logged in successfully"
+                },
+                "404":{
+                    "description":"User not exist please signup"
+                }    
+            }
+        }
+    },
+    "/api/user/detail": {
+        "get":{
+            "tags":["Users"],
+            "description":"This would be our users api when usrs wants user's( list at that time this API will be called by users with authentication token in header and this api will return all user data in JSON form where role is equal to \"company\" or \"user\"",
+            "parameters":[ {
+                "name":"Authorization",
+                "in":"header",
+                "description":"Token for auhtorization",
+                "schema": {
+                    "type":"string",
+                    "properties":"Authorization"
+                }
+            }
+            ],
+            "produces":["application/json"],
+            "responses": {
+                "204":{
+                    "description":"Data not found."
+                },
+                "200":{
+                    "description":"Found data."
+                }
+            }
+
+        }
+    },
+    "/api/user/update":{
+        "put":{
+            "tags":["Users"],
+            "description":"After user login then user will have edit options.\n - Edit  details.\n - On Edit detail this api will be called with data user filled in form.\n - if user is admin can change the users permissions and field then  pass the target users userId and permissions in body \n- admin can update any users data insert the userId in body",
+            "parameters":[
+                {
+                    "name":"Authorization",
+                    "in":"header",
+                    "description":"Token for auhtorization",
+                    "schema": {
+                        "type":"string",
+                        "properties":"Authorization"
+                    }
+                },
+                {
+                    "name":"user",
+                    "in":"body",
+                    "description":"Details to be update in database.",
+                    "schema": {
+                        "type":"object",
+                        "properties": {
+                            "userId":{
+                                "type":"string",
+                                "example":""
+                            },
+                            "firstName": {
+                                "type": "string",
+                                "example":"xyz"
+                            },
+                            "lastName": {
+                                "type": "string",
+                                "example":"abc"
+                            },
+                            "email": {
+                                "type": "string",
+                                "example":"abc@gmail.com"
+                            },
+                            "gender": {
+                                "type": "string",
+                                "example":"male/femail"
+                            },
+                            "mobile": {
+                                "type":"Number",
+                                "example":"7879879798"
+                            },
+                            "permissions": {
+                                "type": {},
+                                "example":{ "":{}}
+                            }                  
+                        }
+                    }
+                }
+            ],
+            "produces":["application/json"],
+            "responses": {
+                "409":{
+                    "description":"User already exist."
+                },
+                "201":{
+                    "description":"User updated successfully."
+                }
+            }
+        }
+    },
+    "/api/user/delete":{
+        "delete":{
+            "tags":["Users"],
+            "description":"This api will delete particular user  whose id is passed in token.",
+            "parameters":[
+                {
+                    "name":"Authorization",
+                    "in":"header",
+                    "description":"Token for auhtorization",
+                    "schema": {
+                        "type":"string",
+                        "properties":"Authorization"
+                    }
+                }
+            ],
+            "responses":{
+                "200":{
+                    "description":"deleted successfully"
+                }
+            }
+        }
+    },
+    "/api/user/changepassword": {
+
+        "post": {
+            "tags":["Users"],
+            "description":"This will also be  all users.\n - At the time of change password user have to enter their old passoword with new password.\n - Also Authentication token will be passed in header so that our backend can verify that this is our authenticated user.",
+            "parameters":[
+                {
+                    "name":"Authorization",
+                    "in":"header",
+                    "description":"Token for auhtorization",
+                    "schema": {
+                        "type":"string",
+                        "properties":"Authorization"
+                    }
+                },
+                {
+                    "name": "user",
+                    "in": "body",
+                    "description": "For Change Password",
+                    "schema": {
+                        "type":"object",
+                        "properties": {
+                            "oldPassword": {
+                                "type": "string",
+                                "example":""
+                            },
+                            "newPassword": {
+                                "type": "string",
+                                "example":""
+                            }
+                            }
+                        }
+                    }
+            ],
+            "requestBody": {
+                "content": 
+                    "application/json"
+            },
+            "produces":["application/json"],
+            "responses": {
+                "201": {
+                    "description":"Password changes successfully"
+                },
+                "404":{
+                    "description":"User not found."
+                }
+            }
+        }  
+    },
+    "/api/user/logout": {
+    "post": {
+        "tags":["Users"],
+        "description":"Logout api for user .\n - At the time of logout Authentication token will be passed in header.\n - And with url we have to pass user id on base of id our update query to clear token.\n - After logout token will be erased from both frontend and backend so user can't access after login apis. ",
+        "parameters":[
+            {
+                "name":"Authorization",
+                "in":"header",
+                "description":"Token for auhtorization",
+                "schema": {
+                    "type":"string",
+                    "properties":"Authorization"
+                }
+            }
+        ],
+        "produces":["application/json"],
+        "responses": {
+            "200": {
+                "description":"Logged out successfully"
+            },
+            "304":{
+                "description":"Token can't be updated something went wrong."
+            }
+        }
+    }
+    },
+    "/api/user/list":{
+        "post":{
+            "tags":["Users"],
+            "description":"List api for user.\n-At that time insert the authenticaton token in header get the all user list .\n- second want the search value data list then pass the search key value in body and get the list.",
+            "parameters":[
+               {
+                "name":"Authorization",
+                "in":"header",
+                "description":"Token for auhtorization",
+                "schema": {
+                    "type":"string",
+                    "properties":"Authorization"
+                }
+            },
+            {
+                "name": "user",
+                "in": "body",
+                "description": "For search data list",
+                "schema": {
+                    "type":"object",
+                    "properties": {
+                        "search": {
+                            "type": "string",
+                            "example":""
+                        }
+                        }
+                    }
+                }
+
+            ],
+            "produces":["application/json"],
+        "responses": {
+            "200": {
+                "description":"User list fetched"
+            },
+            "401":{
+                "description":"error message"
+            }
+        }
+        }
+    },
+    "/api/role/add":{
+        "post":{
+            "tags":["Admin"],
+            "description":"Addrole  process for admin:\n\n - At the time of addrole admin will be asked to insert details about name of role and permissions.\n -only admin login and insert token can access this api .",
+            "parameters":[
+                {
+                    "name":"Authorization",
+                    "in":"header",
+                    "description":"Token for auhtorization",
+                    "schema": {
+                        "type":"string",
+                        "properties":"Authorization"
+                    }
+                },
+                {
+                    "name": "admin",
+                    "in": "body",
+                    "description": "admin that we want to create",
+                    "schema": {
+                        "type":"object",
+                        "properties": {
+                            "role": {
+                                "type": "string",
+                                "example":"xyz"
+                            },
+                            "permissions": {
+                                "type": {},
+                                "example":{ "user":{"delete":true,"update":true}}
+                            }
+                        }
+                    }
+                }
+            ],
+            "produces":["application/json"],
+        "responses": {
+            "200": {
+                "description":"Role created successfully"
+            },
+            "409":{
+                "description":"Role already exist."
+            },
+            "403":{
+                "description":"Access Denied"
+            }
+        }
+        }
+    },
+    "/api/role/update":{
+        "put":{
+            "tags":["Admin"],
+            "description":"Only admin can access this api with admin login  token. \n -admin can update permission for assing role in body using this api.",
+            "parameters":[
+                {
+                    "name":"Authorization",
+                    "in":"header",
+                    "description":"Token for auhtorization",
+                    "schema": {
+                        "type":"string",
+                        "properties":"Authorization"
+                    }
+                },
+                {
+                    "name": "admin",
+                    "in": "body",
+                    "description": "admin that we want to create",
+                    "schema": {
+                        "type":"object",
+                        "properties": {
+                            "role": {
+                                "type": "string",
+                                "example":"xyz"
+                            },
+                            "permissions": {
+                                "type": "Array",
+                                "example":["delete","update"]
+                            }
+                        }
+                    }
+                }
+            ],
+            "produces":["application/json"],
+        "responses": {
+            "200": {
+                "description":"Role updated successfully"
+            },
+            "400":{
+                "description":"role does not exist"
+            },
+            "403":{
+                "description":"Access Denied"
+            }
+        }
+        }
+    },
+    "/api/role/delete":{
+        "delete":{
+            "tags":["Admin"],
+            "description":"Only admin can access this api with admin login  token . \n -This api will delete particular role whose passed in body.",
+            "parameters":[
+                {
+                    "name":"Authorization",
+                    "in":"header",
+                    "description":"Token for auhtorization",
+                    "schema": {
+                        "type":"string",
+                        "properties":"Authorization"
+                    }
+                },
+                {
+                    "name": "admin",
+                    "in": "body",
+                    "description": "admin that we want to create",
+                    "schema": {
+                        "type":"object",
+                        "properties": {
+                            "role": {
+                                "type": "string",
+                                "example":"xyz"
+                            }
+                        }
+                    }
+                }
+            ],
+            "responses":{
+                "200":{
+                    "description":" role deleted successfully"
+                },
+                "403":{
+                    "description":"Access Denied"
+                },
+                "409":{
+                    "description":"role already exists"
+                }
+            }
+        }
+    },
+    "/api/role/list":{
+        "get":{
+            "tags":["Admin"],
+            "description":"This would be our admin api when admin wants role's list at that time this API will be called by admin with authentication token in header and this api will return all roles data in JSON",
+            "parameters":[
+                {
+                    "name":"Authorization",
+                    "in":"header",
+                    "description":"Token for auhtorization",
+                    "schema": {
+                        "type":"string",
+                        "properties":"Authorization"
+                    }
+                }
+            ],
+            "responses":{
+                "200":{
+                    "description":"Role list fetched"
+                },
+                "403":{
+                    "description":"Access Denied"
+                }
+            }
+
+        }
+    }
+  }
+}
